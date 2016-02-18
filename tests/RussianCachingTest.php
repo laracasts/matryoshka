@@ -1,6 +1,6 @@
 <?php
 
-use Laracasts\Dolly\RussianCaching;
+use Laracasts\Matryoshka\RussianCaching;
 
 class RussianCachingTest extends TestCase
 {

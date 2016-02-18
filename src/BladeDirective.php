@@ -1,6 +1,6 @@
 <?php
 
-namespace Laracasts\Dolly;
+namespace Laracasts\Matryoshka;
 
 class BladeDirective
 {

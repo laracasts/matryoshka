@@ -40,5 +40,5 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 
 class Post extends \Illuminate\Database\Eloquent\Model
 {
-    use Laracasts\Dolly\Cacheable;
+    use Laracasts\Matryoshka\Cacheable;
 }

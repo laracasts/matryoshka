@@ -1,7 +1,7 @@
 <?php
 
-use Laracasts\Dolly\RussianCaching;
-use Laracasts\Dolly\BladeDirective;
+use Laracasts\Matryoshka\RussianCaching;
+use Laracasts\Matryoshka\BladeDirective;
 
 class BladeDirectiveTest extends TestCase
 {

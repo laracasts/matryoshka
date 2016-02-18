@@ -9,7 +9,6 @@ class CacheableTest extends TestCase
 
         $this->assertEquals(
             'Post/1-'.$model->updated_at->timestamp,
-
             $model->getCacheKey()
         );
     }
