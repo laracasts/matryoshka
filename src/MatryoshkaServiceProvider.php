@@ -5,7 +5,7 @@ namespace Laracasts\Matryoshka;
 use Blade;
 use Illuminate\Support\ServiceProvider;
 
-class DollyServiceProvider extends ServiceProvider
+class MatryoshkaServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
