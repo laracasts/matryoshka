@@ -57,7 +57,7 @@ class RussianCaching
     /**
      * Normalize the cache key.
      *
-     * @param string $key
+     * @param mixed $key
      */
     protected function normalizeCacheKey($key)
     {
