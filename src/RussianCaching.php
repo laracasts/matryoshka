@@ -61,7 +61,7 @@ class RussianCaching
      */
     protected function normalizeCacheKey($key)
     {
-        if ($key instanceof \Illuminate\Database\Eloquent\Model) {
+        if (is_object($key) && method_exists($key, 'getCacheKey')) {
             return $key->getCacheKey();
         }
 
