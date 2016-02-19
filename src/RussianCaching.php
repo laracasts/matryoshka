@@ -26,7 +26,7 @@ class RussianCaching
     /**
      * Put to the cache.
      *
-     * @param string $key
+     * @param mixed  $key
      * @param string $fragment
      */
     public function put($key, $fragment)
