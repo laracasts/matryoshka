@@ -43,7 +43,7 @@ class RussianCaching
     /**
      * Check if the given key exists in the cache.
      *
-     * @param string $key
+     * @param mixed $key
      */
     public function has($key)
     {
