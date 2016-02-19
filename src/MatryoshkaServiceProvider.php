@@ -9,8 +9,6 @@ class MatryoshkaServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -25,8 +23,6 @@ class MatryoshkaServiceProvider extends ServiceProvider
 
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register()
     {
@@ -37,3 +33,4 @@ class MatryoshkaServiceProvider extends ServiceProvider
         });
     }
 }
+

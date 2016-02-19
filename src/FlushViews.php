@@ -9,8 +9,8 @@ class FlushViews
     /**
      * Handle the request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      */
     public function handle($request, $next)
     {
@@ -18,6 +18,7 @@ class FlushViews
             Cache::tags('views')->flush();
         }
 
-        return $next($request); 
+        return $next($request);
     }
 }
+
