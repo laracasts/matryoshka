@@ -13,11 +13,11 @@ class MatryoshkaServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('cache', function ($expression) {
-            return "<?php if (! app('Laracasts\Matryoshka\BladeDirective')->setUp{$expression}) { ?>";
+            return "<?php if (! app('Laracasts\Matryoshka\BladeDirective')->setUp{$expression}) : ?>";
         });
 
         Blade::directive('endcache', function () {
-            return "<?php } echo app('Laracasts\Matryoshka\BladeDirective')->tearDown() ?>";
+            return "<?php endif; echo app('Laracasts\Matryoshka\BladeDirective')->tearDown() ?>";
         });
     }
 
