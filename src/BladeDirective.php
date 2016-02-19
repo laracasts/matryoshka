@@ -62,31 +62,18 @@ class BladeDirective
      */
     protected function normalizeKey($model, $key = null)
     {
-        if ($model instanceof \Illuminate\Database\Eloquent\Model) {
-            // If we were given a key to use, we'll always
-            // prefer it over the model's cache key.
-            if ($key) {
-                return $key;
-            }
-
-            // Otherwise, if the model can calculate the
-            // key itself, we'll use that option.
-            if (method_exists($model, 'getCacheKey')) {
-                return $model->getCacheKey();
-            }
-
-            // But, finally, at this point, we don't know.
-            throw new Exception(
-                'Please have your model use the "Laracasts\Matryoshka\Cacheable" trait.'
-            );
+        // If the user wants to provide their own cache
+        // key, we'll opt for that.
+        if (is_string($model) || is_string($key)) {
+            return is_string($model) ? $model : $key;
+        }
+    
+        // Otherwise we'll try to use the model to calculate
+        // the cache key, itself.
+        if (is_object($model) && method_exists($model, 'getCacheKey')) {
+            return $model->getCacheKey();
         }
 
-        // If we weren't given an Eloquent model, but instead
-        // a string, that will be our cache key.
-        if (is_string($model)) {
-            return $model;
-        }
-
-        throw new Exception('Could not calculate the cache key.');
+        throw new Exception('Could not determine an appropriate cache key.');
     }
 }
