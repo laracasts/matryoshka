@@ -33,7 +33,8 @@ class BladeDirective
     /**
      * Handle the @cache setup.
      *
-     * @param mixed $model
+     * @param mixed       $model
+     * @param string|null $key
      */
     public function setUp($model, $key = null)
     {
