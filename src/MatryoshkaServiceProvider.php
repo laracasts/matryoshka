@@ -26,11 +26,7 @@ class MatryoshkaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(BladeDirective::class, function () {
-            return new BladeDirective(
-                new RussianCaching(app('cache.store'))
-            );
-        });
+        $this->app->singleton(BladeDirective::class);
     }
 }
 
