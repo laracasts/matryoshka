@@ -9,11 +9,10 @@ trait Cacheable
      */
     public function getCacheKey()
     {
-        return sprintf("%s/%s-%s", 
+        return sprintf("%s/%s-%s",
             get_class($this),
-            $this->id,
+            $this->getKey(),
             $this->updated_at->timestamp
         );
     }
 }
-
