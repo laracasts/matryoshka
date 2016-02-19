@@ -24,6 +24,54 @@ class BladeDirectiveTest extends TestCase
         $this->assertTrue($this->doll->has($post));
     }
 
+    /** @test */
+    function it_can_use_a_string_as_the_cache_key()
+    {
+        $doll = $this->prophesize(RussianCaching::class);
+        $directive = new BladeDirective($doll->reveal());
+
+        $doll->has('foo')->shouldBeCalled();
+        $directive->setUp('foo');
+
+        ob_end_clean(); // Since we're not doing teardown.
+    }
+
+    /** @test */
+    function it_can_use_the_model_to_determine_the_cache_key()
+    {
+        $doll = $this->prophesize(RussianCaching::class);
+        $directive = new BladeDirective($doll->reveal());
+
+        $post = $this->makePost(); 
+        $doll->has('Post/1-' . $post->updated_at->timestamp)->shouldBeCalled();
+        $directive->setUp($post);
+
+        ob_end_clean(); // Since we're not doing teardown.
+    }
+
+    /** @test */
+    function it_can_use_a_string_to_override_the_models_cache_key()
+    {
+        $doll = $this->prophesize(RussianCaching::class);
+        $directive = new BladeDirective($doll->reveal());
+
+        $doll->has('override-key')->shouldBeCalled();
+        $directive->setUp($this->makePost(), 'override-key');
+
+        ob_end_clean(); // Since we're not doing teardown.
+    }
+
+    /** 
+     * @test 
+     * @expectedException Exception
+     * */
+    function it_throws_an_exception_if_it_cannot_determine_the_cache_key()
+    {
+        $directive = $this->createNewCacheDirective();
+
+        $directive->setUp(new UnCacheablePost);
+    }
+
     protected function createNewCacheDirective()
     {
         $cache = new \Illuminate\Cache\Repository(
@@ -36,3 +84,4 @@ class BladeDirectiveTest extends TestCase
     }
 }
 
+class UnCacheablePost extends \Illuminate\Database\Eloquent\Model {}

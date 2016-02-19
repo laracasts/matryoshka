@@ -2,6 +2,8 @@
 
 namespace Laracasts\Matryoshka;
 
+use Exception;
+
 class BladeDirective
 {
     /**
@@ -33,11 +35,11 @@ class BladeDirective
      *
      * @param mixed $model
      */
-    public function setUp($model)
+    public function setUp($model, $key = null)
     {
         ob_start();
 
-        $this->keys[] = $key = $model->getCacheKey();
+        $this->keys[] = $key = $this->normalizeKey($model, $key);
 
         return $this->cache->has($key);
     }
@@ -51,5 +53,40 @@ class BladeDirective
             array_pop($this->keys), ob_get_clean()
         );
     }
-}
 
+    /**
+     * Normalize the cache key.
+     *
+     * @param mixed       $model
+     * @param string|null $key
+     */
+    protected function normalizeKey($model, $key = null)
+    {
+        if ($model instanceof \Illuminate\Database\Eloquent\Model) {
+            // If we were given a key to use, we'll always
+            // prefer it over the model's cache key.
+            if ($key) {
+                return $key;
+            }
+
+            // Otherwise, if the model can calculate the
+            // key itself, we'll use that option.
+            if (method_exists($model, 'getCacheKey')) {
+                return $model->getCacheKey();
+            }
+
+            // But, finally, at this point, we don't know.
+            throw new Exception(
+                'Please have your model use the "Laracasts\Matryoshka\Cacheable" trait.'
+            );
+        }
+
+        // If we weren't given an Eloquent model, but instead
+        // a string, that will be our cache key.
+        if (is_string($model)) {
+            return $model;
+        }
+
+        throw new Exception('Could not calculate the cache key.');
+    }
+}
