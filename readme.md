@@ -2,7 +2,7 @@
 
 Matryoshka is a package for Laravel that provides Russian-Doll caching for your view logic.
 
-> Want to learn how this exact package was made from scratch. [See Laracasts.com](https://laracasts.com/series/russian-doll-caching-in-laravel).
+> Want to learn how this exact package was made from scratch? [See Laracasts.com](https://laracasts.com/series/russian-doll-caching-in-laravel).
 
 ## Installation
 
@@ -69,7 +69,7 @@ Consider the following fragment:
 ```html
 @cache($post)
     <article>
-        <h2>{{ $post->title }}>/h2>
+        <h2>{{ $post->title }}></h2>
         <p>Written By: {{ $post->author->username }}</p>
 
         <div class="body">{{ $post->body }}</div>
@@ -185,3 +185,5 @@ Give these two articles a read:
 
 - https://signalvnoise.com/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui
 - https://signalvnoise.com/posts/3113-how-key-based-cache-expiration-works
+
+And, if you enjoy Laracasts, [watch the creation of this package from scratch here.](https://laracasts.com/series/russian-doll-caching-in-laravel)
