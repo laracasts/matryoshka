@@ -37,6 +37,19 @@ class BladeDirectiveTest extends TestCase
     }
 
     /** @test */
+    function it_can_use_a_collection_as_the_cache_key()
+    {
+        $doll = $this->prophesize(RussianCaching::class);
+        $directive = new BladeDirective($doll->reveal());
+        
+        $collection = collect(['one', 'two']);
+        $doll->has(md5($collection))->shouldBeCalled();
+        $directive->setUp($collection);
+
+        ob_end_clean(); // Since we're not doing teardown.
+    }
+
+    /** @test */
     function it_can_use_the_model_to_determine_the_cache_key()
     {
         $doll = $this->prophesize(RussianCaching::class);
@@ -60,6 +73,7 @@ class BladeDirectiveTest extends TestCase
 
         ob_end_clean(); // Since we're not doing teardown.
     }
+
 
     /** 
      * @test 
