@@ -157,6 +157,22 @@ Now, everything is in place. You might render your view, like so:
 
 Notice the Russian-Doll style cascading for our caches; that's the key. If any note is updated, its individual cache will clear - along with its parent - but any  siblings will remain untouched.
 
+### Caching Collections
+
+You won't always want to cache model instances; you may wish to cache a Laravel collection as well! No problem.
+
+```html
+@cache($posts)
+    @foreach ($posts as $post)
+        @include ('post')
+    @endforeach
+@endcache
+```
+
+Now, as long as the `$posts` collection contents does not change, that `@foreach` section will never run. Instead, as always, we'll pull from the cache.
+
+Behind the scenes, this package will detect that you've passed a Laravel collection to the `cache` directive, and will subsequently generate a unique cache key for the collection.
+
 ## FAQ
 
 **1. Is there any way to override the cache key for a model instance?**
