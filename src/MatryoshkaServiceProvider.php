@@ -20,6 +20,11 @@ class MatryoshkaServiceProvider extends ServiceProvider
         }
 
         Blade::directive('cache', function ($expression) {
+            $version = explode('.', $this->app::VERSION);
+            // Starting with laravel 5.3 the parens are not included in the expression string.
+            if ($version[1] > 2) {
+                return "<?php if (! app('Laracasts\Matryoshka\BladeDirective')->setUp({$expression})) : ?>";
+            }
             return "<?php if (! app('Laracasts\Matryoshka\BladeDirective')->setUp{$expression}) : ?>";
         });
 
