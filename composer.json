@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "illuminate/support": "^5.2"
+        "illuminate/support": "^5.1"
     },
     "autoload": {
         "psr-4": {
@@ -18,11 +18,11 @@
         }
     },
     "autoload-dev": {
-        "classmap": ["tests/TestCase.php"]   
+        "classmap": ["tests/TestCase.php"]
     },
     "require-dev": {
         "phpunit/phpunit": "^5.2",
-        "illuminate/database": "^5.2",
-        "illuminate/cache": "^5.2"
+        "illuminate/database": "^5.1",
+        "illuminate/cache": "^5.1"
     }
 }
